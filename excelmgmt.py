@@ -9,6 +9,7 @@ import httplib2
 import time
 from apiclient import discovery
 import sys
+from emailmgmt import get_messages
 
 CSV_FILE = None
 USER_ID = 'me'
@@ -18,11 +19,16 @@ def main():
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
-    CSV_FILE = sys.argv[1]    
+    CSV_FILE = sys.argv[1]
+
+    for message in get_messages(service, USER_ID):
+        process_email(message.decode("utf8"))
     
 def process_email(message):
     global CSV_FILE
+    print(type(message))
     data = pyexcel_io.get_data(CSV_FILE)
+    print(data)
     if len(data[0])!=6:
         print("Invalid file!")
         #Prompt for new
