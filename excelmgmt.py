@@ -33,6 +33,29 @@ def main():
 
 
 
+def outputmain():
+    import pandas as pd
+    spreadsheet = pd.read_csv(csv_file)
+
+    balance = get_balance(spreadsheet)
+    percentages = get_percentages(spreadsheet)
+
+    send_email(balance,percentages)
+
+
+def send_email(x,y):
+
+def get_balance(spreadsheet):
+
+    grouped = spreadsheet.groupby([])
+
+    return balance
+
+def get_percentages(spreadsheet):
+
+    grouped = spreadsheet.groupby(["Food","Entertainment","Travel","Clothing","Rent","Income","Housing","Miscellaneous"])
+
+    return spreadsheet
 
 if __name__ == '__main__':
     main()
