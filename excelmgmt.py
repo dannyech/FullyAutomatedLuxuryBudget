@@ -6,7 +6,7 @@ from webfns import get_credentials
 from oauth2client import tools
 import httplib2
 from apiclient import discovery, errors
-import emailmgmt
+from emailmgmt import get_newest_messages
 
 try:
     import argparse
@@ -14,24 +14,21 @@ try:
 except ImportError:
     flags = None
 
-SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
-CLIENT_SECRET_FILE = 'client_secret.json'
-APPLICATION_NAME = 'FullyAutomatedLuxuryBudget'
 CSV_FILE = None
+USER_ID = 'me'
 
 def main():
     global CSV_FILE
     credentials = get_credentials()
-    user_info = get_user_info(credentials)
-    user_id = user_info.get('id')
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
-    CSV_FILE = sys.argv[1]
-
-    messages = get_newest_messages(service, user_id)
+    #CSV_FILE = sys.argv[1]
+    
+    messages = get_newest_messages(service, USER_ID)
     print(messages)
-
-def process_email(message)
+    
+"""
+def process_email(message):
     global CSV_FILE
     data = pyexcel_io.get_data(CSV_FILE)
     if "," not in message:
@@ -57,7 +54,7 @@ def process_email(message)
 
     else:
         return
-
+"""
 
 
 
