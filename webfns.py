@@ -6,7 +6,7 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 
-SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+SCOPES = 'https://www.googleapis.com/auth/gmail.modify'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'FullyAutomatedLuxuryBudget'
 

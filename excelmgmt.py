@@ -6,7 +6,7 @@ from webfns import get_credentials
 from oauth2client import tools
 import httplib2
 from apiclient import discovery, errors
-from emailmgmt import get_newest_messages
+from emailmgmt import get_messages
 
 try:
     import argparse
@@ -22,12 +22,8 @@ def main():
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
-    #CSV_FILE = sys.argv[1]
+    CSV_FILE = sys.argv[1]    
     
-    messages = get_newest_messages(service, USER_ID)
-    print(messages)
-    
-"""
 def process_email(message):
     global CSV_FILE
     data = pyexcel_io.get_data(CSV_FILE)
@@ -54,9 +50,6 @@ def process_email(message):
 
     else:
         return
-"""
-
-
 
 if __name__ == '__main__':
     main()
