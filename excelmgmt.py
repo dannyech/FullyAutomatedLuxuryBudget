@@ -5,23 +5,21 @@ from pyexcel_io import get_data
 from webfns import get_credentials
 from oauth2client import tools
 import httplib2
+
 import time
 from apiclient import discovery
 import sys
 
-SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
-CLIENT_SECRET_FILE = 'client_secret.json'
-APPLICATION_NAME = 'FullyAutomatedLuxuryBudget'
 CSV_FILE = None
+USER_ID = 'me'
 
 def main():
     global CSV_FILE
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
-    CSV_FILE = sys.argv[1]
-
-
+    CSV_FILE = sys.argv[1]    
+    
 def process_email(message):
     global CSV_FILE
     data = pyexcel_io.get_data(CSV_FILE)
@@ -78,15 +76,9 @@ def process_email(message):
         change = first+second
     else:
         return
+
     data.append([curdate, str(first+init_checking), str(second+init_savings),str(change+init_total),str(first+second),note])
-    print(data)
     pyexcel_io.save_data(CSV_FILE,data)
-
-
-
-
-
-
 
 if __name__ == '__main__':
     main()
