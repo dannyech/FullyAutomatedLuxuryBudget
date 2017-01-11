@@ -3,7 +3,8 @@ import pyexcel
 from webfns import get_credentials
 from oauth2client import tools
 import httplib2
-from apiclient import discovery
+from apiclient import discovery, errors
+import emailmgmt
 
 try:
     import argparse
@@ -17,22 +18,13 @@ APPLICATION_NAME = 'FullyAutomatedLuxuryBudget'
 
 def main():
     credentials = get_credentials()
+    user_info = get_user_info(credentials)
+    user_id = user_info.get('id')
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('gmail', 'v1', http=http)
 
-    results = service.users().labels().list(userId='me').execute()
-    labels = results.get('labels', [])
-
-    if not labels:
-        print('No labels found.')
-    else:
-      print('Labels:')
-      for label in labels:
-        print(label['name'])
-
-
-
-
+    messages = get_newest_messages(service, user_id)
+    print(messages)
 
 if __name__ == '__main__':
     main()
