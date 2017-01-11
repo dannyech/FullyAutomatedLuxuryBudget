@@ -1,4 +1,6 @@
 # FullyAutomatedLuxuryBudget
 
-Drew, Danny, and Tex will fully autmoate your budget, making it luxury in the
+Drew, Danny, and Tex will fully automate your budget, making it luxury in the
 process.
+
+Fuck Danny. 
