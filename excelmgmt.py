@@ -9,7 +9,6 @@ import time
 from apiclient import discovery
 import sys
 
-
 SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'FullyAutomatedLuxuryBudget'
