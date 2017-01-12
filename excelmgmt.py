@@ -23,14 +23,14 @@ def main():
         CSV_FILE = sys.argv[1]
 
         for message in get_messages(service, USER_ID):
-            process_email(message.decode("utf8"))
+            process_email(message)
     else:
         print("Usage:\r\n  python excelmgmt.py <csv-file>")
     
 def process_email(message):
     global CSV_FILE
     message = message.encode("utf8")
-    data = pyexcel_io.get_data(CSV_FILE)
+    data = pyexcel_io.get_data(CSV_FILE)[CSV_FILE]
     print(data)
     if len(data[0])!=6:
         print("Invalid file!")
