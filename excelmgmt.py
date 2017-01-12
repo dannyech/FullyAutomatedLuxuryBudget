@@ -15,14 +15,17 @@ CSV_FILE = None
 USER_ID = 'me'
 
 def main():
-    global CSV_FILE
-    credentials = get_credentials()
-    http = credentials.authorize(httplib2.Http())
-    service = discovery.build('gmail', 'v1', http=http)
-    CSV_FILE = sys.argv[1]
+    if len(sys.argv) == 2:
+        global CSV_FILE
+        credentials = get_credentials()
+        http = credentials.authorize(httplib2.Http())
+        service = discovery.build('gmail', 'v1', http=http)
+        CSV_FILE = sys.argv[1]
 
-    for message in get_messages(service, USER_ID):
-        process_email(message.decode("utf8"))
+        for message in get_messages(service, USER_ID):
+            process_email(message.decode("utf8"))
+    else:
+        print("Usage:\r\n  python excelmgmt.py <csv-file>")
     
 def process_email(message):
     global CSV_FILE
