@@ -24,7 +24,7 @@ def main():
             for message in get_messages(service, USER_ID):
                 print("Processing message: " + message)
                 process_email(message)
-            time.sleep(5)
+            time.sleep(600)
     else:
         print("Usage:\r\n  python excelmgmt.py <csv-file>")
     
