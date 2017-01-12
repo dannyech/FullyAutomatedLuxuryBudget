@@ -13,7 +13,7 @@ def get_messages(service, user_id):
         message_texts = []
         for message in messages:
             message_texts.append(get_message_text(service, user_id, message['id']))
-            #mark_message_old(service, user_id, message['id'])
+            mark_message_old(service, user_id, message['id'])
         return message_texts
     except errors.HttpError, error:
         print('An error occurred: %s' % error)
