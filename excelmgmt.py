@@ -26,7 +26,7 @@ def main():
     
 def process_email(message):
     global CSV_FILE
-    print(type(message))
+    message = message.encode("utf8")
     data = pyexcel_io.get_data(CSV_FILE)
     print(data)
     if len(data[0])!=6:
