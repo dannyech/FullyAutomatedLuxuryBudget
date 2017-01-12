@@ -5,7 +5,6 @@ from pyexcel_io import get_data
 from webfns import get_credentials
 from oauth2client import tools
 import httplib2
-
 import time
 from apiclient import discovery
 import sys
@@ -21,17 +20,17 @@ def main():
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
         CSV_FILE = sys.argv[1]
-
-        for message in get_messages(service, USER_ID):
-            process_email(message)
+        while True:
+            for message in get_messages(service, USER_ID):
+                print("Processing message: " + message)
+                process_email(message)
+            time.sleep(5)
     else:
         print("Usage:\r\n  python excelmgmt.py <csv-file>")
     
 def process_email(message):
     global CSV_FILE
-    message = message.encode("utf8")
     data = pyexcel_io.get_data(CSV_FILE)[CSV_FILE]
-    print(data)
     if len(data[0])!=6:
         print("Invalid file!")
         #Prompt for new
